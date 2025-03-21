@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 
 // import {ERC20} from "@solmate/tokens/ERC20.sol";
 import {ERC20} from "@solmate/tokens/ERC20.sol";
+// C:\Users\hp\OneDrive\Desktop\foundry-lottery\lib\solmate\src\tokens\ERC20.sol
 
 interface ERC677Receiver {
     function onTokenTransfer(address _sender, uint256 _value, bytes memory _data) external;

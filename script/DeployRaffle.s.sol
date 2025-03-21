@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-import {Script} from "forge-std/Script.sol";
+import {Script} from "lib/forge-std/src/Script.sol";
 import {Raffle} from "../src/Raffle.sol";
 import {HelperConfig} from "./HelperConfig.s.sol";
 import {CreateSubscription} from "./Interaction.s.sol";
 
 contract DeployRaffle is Script {
-    function run() public {}
+    function run() public {
+        deployContract();
+    }
 
     function deployConrtact() public returns (Raffle, HelperConfig) {
         HelperConfig helperConfig = new HelperConfig();
