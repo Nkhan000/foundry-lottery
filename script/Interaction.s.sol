@@ -3,7 +3,7 @@ pragma solidity ^0.8.24;
 
 import {Script, console} from "lib/forge-std/src/Script.sol";
 import {HelperConfig, CodeConstants} from "script/HelperConfig.s.sol";
-import {VRFCoordinatorV2_5Mock} from "@chainlink/contracts/src/v0.8/vrf/mocks/VRFCoordinatorV2_5Mock.sol";
+import {VRFCoordinatorV2_5Mock} from "../lib/chainlink/contracts/src/v0.8/vrf/mocks/VRFCoordinatorV2_5Mock.sol";
 import {LinkToken} from "test/mocks/LinkToken.sol";
 import {DevOpsTools} from "lib/foundry-devops/src/DevOpsTools.sol";
 
@@ -31,7 +31,7 @@ contract CreateSubscription is Script {
 }
 
 contract FundSubscription is Script, CodeConstants {
-    uint256 public constant FUND_AMT = 1 ether; // 3 LINK
+    uint256 public constant FUND_AMT = 1 ether; // 1 LINK
 
     function run() public {
         fundSubscriptionUsingConfig();
@@ -50,6 +50,7 @@ contract FundSubscription is Script, CodeConstants {
         console.log("funding subscription : ", subscriptionId);
         console.log("using vrf coordinator : ", vrfCoordinator);
         console.log("link token : ", linkToken);
+        console.log("BALANCE : ", LinkToken(linkToken).balanceOf(msg.sender));
 
         if (block.chainid == LOCAL_CHAIN_ID) {
             vm.startBroadcast();
@@ -64,7 +65,7 @@ contract FundSubscription is Script, CodeConstants {
     }
 }
 
-contract AddConsumenr is Script {
+contract AddConsumer is Script {
     function addConsumerUsingConfig(address mostRecentlyDeployed) public {
         HelperConfig helperConfig = new HelperConfig();
         uint256 subId = helperConfig.getConfig().subscriptionId;
